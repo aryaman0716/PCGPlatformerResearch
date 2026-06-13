@@ -1,35 +1,62 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 public class RandomGenerator : MonoBehaviour
 {
+    [Header("Platform Prefabs")]
     public GameObject startPlatformPrefab;
     public GameObject platformPrefab;
     public GameObject endPlatformPrefab;
-    public int numberOfPlatforms = 10;
-    public float minGap = 2f;
-    public float maxGap = 8f;
-    public float minHeight = -3f;
-    public float maxHeight = 3f;
-    private List<Transform> generatedPlatforms = new List<Transform>(); 
+
+    public int numberOfPlatforms = 15;
+    public float maxSideOffset = 15f;
+    public float minPlatformHeight = 0f;
+    public float maxPlatformHeight = 4f;
+    public Transform levelStart;
+    public Transform levelEnd;
+    public Transform player;
+
+    private List<Transform> generatedPlatforms = new List<Transform>();
     private void Start()
     {
         GenerateLevel();
     }
-    void GenerateLevel()
+    private void GenerateLevel()
     {
-        Vector3 currentPosition = Vector3.zero;
-        GameObject start = Instantiate(startPlatformPrefab, currentPosition, Quaternion.identity); 
-        generatedPlatforms.Add(start.transform);     // we add the start platform to the list of generated platforms
-        for (int i = 0; i < numberOfPlatforms; i++) 
+        generatedPlatforms.Clear(); 
+
+        // spawn the start platform
+        GameObject start = Instantiate(startPlatformPrefab, levelStart.position, Quaternion.identity);
+        generatedPlatforms.Add(start.transform);
+        Transform spawnPoint = start.transform.Find("SpawnPoint");
+        if (spawnPoint != null && player != null)
         {
-            float gap = Random.Range(minGap, maxGap); 
-            float height = Random.Range(minHeight, maxHeight);
-            currentPosition += new Vector3(0, height, gap);   // the current pos is updated by adding the gap and height to the previous position
-            GameObject platform = Instantiate(platformPrefab, currentPosition, Quaternion.identity);
-            generatedPlatforms.Add(platform.transform);     // we add the newly generated platform to the list of generated platforms
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.enabled = false;
+                player.position = spawnPoint.position;
+                controller.enabled = true;
+            }
         }
-        currentPosition += new Vector3(0, 0, 5); // ensuring there is some gap before the end platform
-        GameObject end = Instantiate(endPlatformPrefab, currentPosition, Quaternion.identity);
-        generatedPlatforms.Add(end.transform);     // we add the end platform to the list of generated platforms
+        
+        float totalLength = levelEnd.position.z - levelStart.position.z;
+        float sectionLength = totalLength / (numberOfPlatforms + 1);  
+
+        // using a for loop to generate platforms with random gaps and offsets
+        for (int i = 1; i <= numberOfPlatforms; i++)
+        {
+            float sectionStartZ = levelStart.position.z + (sectionLength * i); 
+            float randomZ = sectionStartZ + Random.Range(-sectionLength * 0.3f, sectionLength * 0.3f);
+            float randomX = Random.Range(-maxSideOffset, maxSideOffset);
+            float randomY = Random.Range(minPlatformHeight, maxPlatformHeight);
+
+            Vector3 platformPosition = new Vector3(randomX, randomY, randomZ);
+            GameObject platform = Instantiate(platformPrefab, platformPosition, Quaternion.identity);
+            generatedPlatforms.Add(platform.transform);
+        }
+
+        // spawn the end platform
+        GameObject end = Instantiate(endPlatformPrefab, levelEnd.position, Quaternion.identity);
+        generatedPlatforms.Add(end.transform);
     }
 }
