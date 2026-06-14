@@ -59,4 +59,8 @@ public class RandomGenerator : MonoBehaviour
         GameObject end = Instantiate(endPlatformPrefab, levelEnd.position, Quaternion.identity);
         generatedPlatforms.Add(end.transform);
     }
+    public List<Transform> GeneratedPlatforms
+    {
+        get { return generatedPlatforms; }
+    }
 }
