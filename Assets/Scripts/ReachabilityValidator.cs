@@ -2,7 +2,7 @@ using UnityEngine;
 public class ReachabilityValidator : MonoBehaviour 
 {
     [Header("Player Constraints")]
-    public float maxJumpDistance = 5.75f;
+    public float maxJumpDistance = 6.4f;
     public float maxJumpHeight = 2f;
     public bool IsReachable(Vector3 startPos, Vector3 targetPos)
     {

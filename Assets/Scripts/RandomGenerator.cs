@@ -8,7 +8,7 @@ public class RandomGenerator : MonoBehaviour
     public GameObject endPlatformPrefab;
 
     public int numberOfPlatforms = 15;
-    public float maxSideOffset = 15f;
+    public float maxSideOffset = 7f;
     public float minPlatformHeight = 0f;
     public float maxPlatformHeight = 4f;
     public Transform levelStart;
@@ -58,6 +58,12 @@ public class RandomGenerator : MonoBehaviour
         // spawn the end platform
         GameObject end = Instantiate(endPlatformPrefab, levelEnd.position, Quaternion.identity);
         generatedPlatforms.Add(end.transform);
+
+        LevelEvaluator evaluator = FindFirstObjectByType<LevelEvaluator>();
+        if (evaluator != null)
+        {
+            evaluator.EvaluateLevel();
+        }
     }
     public List<Transform> GeneratedPlatforms
     {
