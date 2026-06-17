@@ -3,19 +3,19 @@ public class LevelEvaluator : MonoBehaviour
 {
     public RandomGenerator generator;
     public ReachabilityValidator validator;
-    private void Start()
-    {
-
-    }
     public void EvaluateLevel()
     {
         int reachableJumps = 0;
         int unreachableJumps = 0;
+        float totalGap = 0f;
+        float totalHeightDifference = 0f;
         var platforms = generator.GeneratedPlatforms; 
 
         for (int i = 0; i < platforms.Count - 1; i++)
         {
-            bool reachable = validator.IsReachable(platforms[i].position, platforms[i + 1].position);  // we check if the next platform is reachable from the current one
+            Transform startPlatform = platforms[i];
+            Transform targetPlatform = platforms[i + 1];  
+            bool reachable = validator.IsReachable(startPlatform, targetPlatform);  // we check if the next platform is reachable from the current one
             if (reachable)
             {
                 reachableJumps++;
@@ -25,12 +25,35 @@ public class LevelEvaluator : MonoBehaviour
                 unreachableJumps++;
             }
 
-            float horizontalDistance = Vector2.Distance(new Vector2(platforms[i].position.x, platforms[i].position.z), new Vector2(platforms[i + 1].position.x, platforms[i + 1].position.z));
-            float verticalDifference = platforms[i + 1].position.y - platforms[i].position.y;
+            Collider startCollider = startPlatform.GetComponent<Collider>();
+            Collider targetCollider = targetPlatform.GetComponent<Collider>();
+            Bounds startBounds = startCollider.bounds;
+            Bounds targetBounds = targetCollider.bounds;
+            Vector3 startPoint = startBounds.ClosestPoint(targetBounds.center);
+            Vector3 targetPoint = targetBounds.ClosestPoint(startBounds.center);
 
-            Debug.Log($"Jump {i + 1} | " + $"Distance={horizontalDistance:F2}m | " + $"HeightDiff={verticalDifference:F2}m | " + $"{(reachable ? "Reachable" : "Unreachable")}");
+            float horizontalGap = Vector2.Distance(new Vector2(startPoint.x, startPoint.z), new Vector2(targetPoint.x, targetPoint.z));
+            float verticalDifference = targetBounds.max.y - startBounds.max.y;
+            totalGap += horizontalGap;
+            totalHeightDifference += Mathf.Abs(verticalDifference);
+
+            Debug.Log(
+               $"Jump {i + 1} | " +
+               $"Gap={horizontalGap:F2}m | " +
+               $"HeightDiff={verticalDifference:F2}m | " +
+               $"{(reachable ? "Reachable" : "Unreachable")}");
         }
+        int totalJumps = reachableJumps + unreachableJumps;
+        float averageGap = totalJumps > 0 ? totalGap / totalJumps : 0f;
+        float averageHeightDifference = totalJumps > 0 ? totalHeightDifference / totalJumps : 0f;
+        float reachabilityPercentage = totalJumps > 0 ? ((float)reachableJumps / totalJumps) * 100f : 0f;
+        bool levelCompletable = unreachableJumps == 0; 
+        Debug.Log($"Total Jumps: {totalJumps}");
         Debug.Log($"Reachable Jumps: {reachableJumps}");
         Debug.Log($"Unreachable Jumps: {unreachableJumps}");
+        Debug.Log($"Reachability: {reachabilityPercentage:F2}%"); 
+        Debug.Log($"Average Gap: {averageGap:F2}m");
+        Debug.Log($"Average Height Difference: {averageHeightDifference:F2}m");
+        Debug.Log($"Level Completable: {levelCompletable}");
     }
 }
