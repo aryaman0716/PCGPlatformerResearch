@@ -3,6 +3,7 @@ public class LevelEvaluator : MonoBehaviour
 {
     public RandomGenerator generator;
     public ReachabilityValidator validator;
+    public LevelMetrics currentMetrics;
     public void EvaluateLevel()
     {
         int reachableJumps = 0;
@@ -43,17 +44,23 @@ public class LevelEvaluator : MonoBehaviour
                $"HeightDiff={verticalDifference:F2}m | " +
                $"{(reachable ? "Reachable" : "Unreachable")}");
         }
-        int totalJumps = reachableJumps + unreachableJumps;
-        float averageGap = totalJumps > 0 ? totalGap / totalJumps : 0f;
-        float averageHeightDifference = totalJumps > 0 ? totalHeightDifference / totalJumps : 0f;
-        float reachabilityPercentage = totalJumps > 0 ? ((float)reachableJumps / totalJumps) * 100f : 0f;
-        bool levelCompletable = unreachableJumps == 0; 
-        Debug.Log($"Total Jumps: {totalJumps}");
-        Debug.Log($"Reachable Jumps: {reachableJumps}");
-        Debug.Log($"Unreachable Jumps: {unreachableJumps}");
-        Debug.Log($"Reachability: {reachabilityPercentage:F2}%"); 
-        Debug.Log($"Average Gap: {averageGap:F2}m");
-        Debug.Log($"Average Height Difference: {averageHeightDifference:F2}m");
-        Debug.Log($"Level Completable: {levelCompletable}");
+
+        // we are calculating the metrics for the level based on the jumps evaluated and storing them
+        currentMetrics = new LevelMetrics();
+        currentMetrics.totalJumps = reachableJumps + unreachableJumps;
+        currentMetrics.reachableJumps = reachableJumps;
+        currentMetrics.unreachableJumps = unreachableJumps;
+        currentMetrics.averageGap = currentMetrics.totalJumps > 0 ? totalGap / currentMetrics.totalJumps : 0f;
+        currentMetrics.averageHeightDifference = currentMetrics.totalJumps > 0 ? totalHeightDifference / currentMetrics.totalJumps : 0f;
+        currentMetrics.reachabilityPercentage = currentMetrics.totalJumps > 0 ? ((float)reachableJumps / currentMetrics.totalJumps) * 100f : 0f;
+        currentMetrics.levelCompletable = unreachableJumps == 0;
+
+        Debug.Log($"Total Jumps: {currentMetrics.totalJumps}");
+        Debug.Log($"Reachable Jumps: {currentMetrics.reachableJumps}");
+        Debug.Log($"Unreachable Jumps: {currentMetrics.unreachableJumps}");
+        Debug.Log($"Reachability: {currentMetrics.reachabilityPercentage:F2}%"); 
+        Debug.Log($"Average Gap: {currentMetrics.averageGap:F2}m");
+        Debug.Log($"Average Height Difference: {currentMetrics.averageHeightDifference:F2}m");
+        Debug.Log($"Level Completable: {currentMetrics.levelCompletable}");
     }
 }
