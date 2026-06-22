@@ -1,7 +1,7 @@
 using UnityEngine;
 public class LevelEvaluator : MonoBehaviour
 {
-    public RandomGenerator generator;
+    public ConstraintGenerator generator;
     public ReachabilityValidator validator;
     public LevelMetrics currentMetrics;
     public void EvaluateLevel()

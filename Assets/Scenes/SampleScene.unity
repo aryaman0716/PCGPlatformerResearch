@@ -797,8 +797,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3aec561dcdc0f459e38309acbce0b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelEvaluator
-  generator: {fileID: 1547976785}
+  generator: {fileID: 1547976787}
   validator: {fileID: 1424842968}
+  currentMetrics:
+    totalJumps: 0
+    reachableJumps: 0
+    unreachableJumps: 0
+    reachabilityPercentage: 0
+    averageGap: 0
+    averageHeightDifference: 0
+    levelCompletable: 0
 --- !u!4 &1097555537
 Transform:
   m_ObjectHideFlags: 0
@@ -901,6 +909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1547976786}
   - component: {fileID: 1547976785}
+  - component: {fileID: 1547976787}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: Untagged
@@ -915,7 +924,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547976784}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49ff703bd98f5ee41814d62ddd8850c0, type: 3}
   m_Name: 
@@ -945,6 +954,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1547976787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547976784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eaa24712841cc64199be8926641542f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConstraintGenerator
+  startPlatformPrefab: {fileID: 7250818260449641594, guid: d8059df943ffb574faac6910e6121cfa, type: 3}
+  platformPrefab: {fileID: 2024104423268673437, guid: fb7065adac52d784aa6378c7263f646f, type: 3}
+  endPlatformPrefab: {fileID: 2111685491001120969, guid: d320a97643684794ba4068ca0babf75a, type: 3}
+  numberOfPlatforms: 15
+  maxSideOffset: 7
+  minPlatformHeight: 0
+  maxPlatformHeight: 4
+  levelStart: {fileID: 1198168888}
+  levelEnd: {fileID: 884901606}
+  player: {fileID: 432271265}
+  maxJumpDistance: 6.4
+  maxJumpHeight: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
