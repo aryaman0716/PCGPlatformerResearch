@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-public class ConstraintGenerator : MonoBehaviour
+public class ConstraintGenerator : MonoBehaviour, ILevelGenerator
 {
     [Header("Platform Prefabs")]
     public GameObject startPlatformPrefab;
@@ -20,11 +20,7 @@ public class ConstraintGenerator : MonoBehaviour
     public float maxJumpHeight = 2f;
 
     private List<Transform> generatedPlatforms = new List<Transform>();
-    private void Start()
-    {
-        GenerateLevel();
-    }
-    private void GenerateLevel()
+    public void GenerateLevel()
     {
         generatedPlatforms.Clear();
         GameObject start = Instantiate(startPlatformPrefab, levelStart.position, Quaternion.identity);
@@ -85,12 +81,6 @@ public class ConstraintGenerator : MonoBehaviour
         }
         GameObject end = Instantiate(endPlatformPrefab, endPosition, Quaternion.identity);
         generatedPlatforms.Add(end.transform);
-
-        LevelEvaluator evaluator = FindFirstObjectByType<LevelEvaluator>();
-        if (evaluator != null)
-        {
-            evaluator.EvaluateLevel();
-        }
     }
     public List <Transform> GeneratedPlatforms
     {

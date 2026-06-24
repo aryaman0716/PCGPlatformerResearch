@@ -797,7 +797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3aec561dcdc0f459e38309acbce0b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelEvaluator
-  generator: {fileID: 1547976787}
   validator: {fileID: 1424842968}
   currentMetrics:
     totalJumps: 0
@@ -853,6 +852,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1382729048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1382729050}
+  - component: {fileID: 1382729049}
+  m_Layer: 0
+  m_Name: ConstraintGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1382729049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382729048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eaa24712841cc64199be8926641542f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConstraintGenerator
+  startPlatformPrefab: {fileID: 7250818260449641594, guid: d8059df943ffb574faac6910e6121cfa, type: 3}
+  platformPrefab: {fileID: 2024104423268673437, guid: fb7065adac52d784aa6378c7263f646f, type: 3}
+  endPlatformPrefab: {fileID: 2111685491001120969, guid: d320a97643684794ba4068ca0babf75a, type: 3}
+  numberOfPlatforms: 15
+  maxSideOffset: 7
+  minPlatformHeight: 0
+  maxPlatformHeight: 4
+  levelStart: {fileID: 1198168888}
+  levelEnd: {fileID: 884901606}
+  player: {fileID: 432271265}
+  maxJumpDistance: 6.4
+  maxJumpHeight: 2
+--- !u!4 &1382729050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382729048}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.96164, y: -0, z: -15.23146}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1424842967
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,7 +954,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1547976784
+--- !u!1 &1678801912
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -907,65 +962,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1547976786}
-  - component: {fileID: 1547976785}
-  - component: {fileID: 1547976787}
+  - component: {fileID: 1678801914}
+  - component: {fileID: 1678801913}
   m_Layer: 0
-  m_Name: LevelGenerator
+  m_Name: RandomGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1547976785
+--- !u!114 &1678801913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547976784}
-  m_Enabled: 0
+  m_GameObject: {fileID: 1678801912}
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49ff703bd98f5ee41814d62ddd8850c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RandomGenerator
-  startPlatformPrefab: {fileID: 7250818260449641594, guid: d8059df943ffb574faac6910e6121cfa, type: 3}
-  platformPrefab: {fileID: 2024104423268673437, guid: fb7065adac52d784aa6378c7263f646f, type: 3}
-  endPlatformPrefab: {fileID: 2111685491001120969, guid: d320a97643684794ba4068ca0babf75a, type: 3}
-  numberOfPlatforms: 10
-  maxSideOffset: 4
-  minPlatformHeight: 0
-  maxPlatformHeight: 4
-  levelStart: {fileID: 1198168888}
-  levelEnd: {fileID: 884901606}
-  player: {fileID: 432271265}
---- !u!4 &1547976786
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547976784}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2315, y: 1.3401, z: 0.44318}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1547976787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547976784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eaa24712841cc64199be8926641542f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ConstraintGenerator
   startPlatformPrefab: {fileID: 7250818260449641594, guid: d8059df943ffb574faac6910e6121cfa, type: 3}
   platformPrefab: {fileID: 2024104423268673437, guid: fb7065adac52d784aa6378c7263f646f, type: 3}
   endPlatformPrefab: {fileID: 2111685491001120969, guid: d320a97643684794ba4068ca0babf75a, type: 3}
@@ -976,8 +993,69 @@ MonoBehaviour:
   levelStart: {fileID: 1198168888}
   levelEnd: {fileID: 884901606}
   player: {fileID: 432271265}
-  maxJumpDistance: 6.4
-  maxJumpHeight: 2
+--- !u!4 &1678801914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678801912}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.96164, y: -0, z: -15.23146}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1845058651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1845058653}
+  - component: {fileID: 1845058652}
+  m_Layer: 0
+  m_Name: GeneratorManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1845058652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845058651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 704aec6a3f43f0845ab15444bdd33553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneratorManager
+  randomGenerator: {fileID: 1678801913}
+  constraintGenerator: {fileID: 1382729049}
+  evaluator: {fileID: 1097555536}
+  generatorType: 1
+--- !u!4 &1845058653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845058651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.96164, y: -0, z: -15.23146}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -986,8 +1064,10 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1081857099}
   - {fileID: 432271265}
-  - {fileID: 1547976786}
   - {fileID: 1198168888}
   - {fileID: 884901606}
   - {fileID: 1424842969}
   - {fileID: 1097555537}
+  - {fileID: 1678801914}
+  - {fileID: 1382729050}
+  - {fileID: 1845058653}

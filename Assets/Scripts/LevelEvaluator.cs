@@ -1,16 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 public class LevelEvaluator : MonoBehaviour
 {
-    public ConstraintGenerator generator;
     public ReachabilityValidator validator;
     public LevelMetrics currentMetrics;
-    public void EvaluateLevel()
+    public LevelMetrics EvaluateLevel(List<Transform> platforms)
     {
         int reachableJumps = 0;
         int unreachableJumps = 0;
         float totalGap = 0f;
         float totalHeightDifference = 0f;
-        var platforms = generator.GeneratedPlatforms; 
 
         for (int i = 0; i < platforms.Count - 1; i++)
         {
@@ -62,5 +61,6 @@ public class LevelEvaluator : MonoBehaviour
         Debug.Log($"Average Gap: {currentMetrics.averageGap:F2}m");
         Debug.Log($"Average Height Difference: {currentMetrics.averageHeightDifference:F2}m");
         Debug.Log($"Level Completable: {currentMetrics.levelCompletable}");
+        return currentMetrics;
     }
 }

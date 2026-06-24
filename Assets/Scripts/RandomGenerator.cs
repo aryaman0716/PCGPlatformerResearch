@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-public class RandomGenerator : MonoBehaviour
+public class RandomGenerator : MonoBehaviour, ILevelGenerator
 {
     [Header("Platform Prefabs")]
     public GameObject startPlatformPrefab;
@@ -16,11 +16,7 @@ public class RandomGenerator : MonoBehaviour
     public Transform player;
 
     private List<Transform> generatedPlatforms = new List<Transform>();
-    private void Start()
-    {
-        GenerateLevel();
-    }
-    private void GenerateLevel()
+    public void GenerateLevel()
     {
         generatedPlatforms.Clear(); 
 
@@ -58,12 +54,6 @@ public class RandomGenerator : MonoBehaviour
         // spawn the end platform
         GameObject end = Instantiate(endPlatformPrefab, levelEnd.position, Quaternion.identity);
         generatedPlatforms.Add(end.transform);
-
-        LevelEvaluator evaluator = FindFirstObjectByType<LevelEvaluator>();
-        if (evaluator != null)
-        {
-            evaluator.EvaluateLevel();
-        }
     }
     public List<Transform> GeneratedPlatforms
     {
