@@ -22,7 +22,7 @@ public class ConstraintGenerator : MonoBehaviour, ILevelGenerator
     private List<Transform> generatedPlatforms = new List<Transform>();
     public void GenerateLevel()
     {
-        generatedPlatforms.Clear();
+        ClearLevel();
         GameObject start = Instantiate(startPlatformPrefab, levelStart.position, Quaternion.identity);
         generatedPlatforms.Add(start.transform);
         Transform spawnPoint = start.transform.Find("SpawnPoint");
@@ -81,6 +81,17 @@ public class ConstraintGenerator : MonoBehaviour, ILevelGenerator
         }
         GameObject end = Instantiate(endPlatformPrefab, endPosition, Quaternion.identity);
         generatedPlatforms.Add(end.transform);
+    }
+    private void ClearLevel()
+    {
+        foreach (Transform platform in generatedPlatforms)
+        {
+            if (platform != null)
+            {
+                Destroy(platform.gameObject);
+            }
+        }
+        generatedPlatforms.Clear();
     }
     public List <Transform> GeneratedPlatforms
     {

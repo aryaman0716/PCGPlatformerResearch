@@ -802,6 +802,8 @@ MonoBehaviour:
     totalJumps: 0
     reachableJumps: 0
     unreachableJumps: 0
+    levelNumber: 0
+    generatorName: 
     reachabilityPercentage: 0
     averageGap: 0
     averageHeightDifference: 0
@@ -1017,30 +1019,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1845058653}
-  - component: {fileID: 1845058652}
+  - component: {fileID: 1845058654}
   m_Layer: 0
-  m_Name: GeneratorManager
+  m_Name: ExperimentRunner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1845058652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845058651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 704aec6a3f43f0845ab15444bdd33553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GeneratorManager
-  randomGenerator: {fileID: 1678801913}
-  constraintGenerator: {fileID: 1382729049}
-  evaluator: {fileID: 1097555536}
-  generatorType: 1
 --- !u!4 &1845058653
 Transform:
   m_ObjectHideFlags: 0
@@ -1056,6 +1042,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1845058654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845058651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 704aec6a3f43f0845ab15444bdd33553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExperimentRunner
+  randomGenerator: {fileID: 1678801913}
+  constraintGenerator: {fileID: 1382729049}
+  evaluator: {fileID: 1097555536}
+  numberOfLevels: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

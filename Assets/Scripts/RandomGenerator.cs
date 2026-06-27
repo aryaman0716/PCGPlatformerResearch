@@ -18,7 +18,7 @@ public class RandomGenerator : MonoBehaviour, ILevelGenerator
     private List<Transform> generatedPlatforms = new List<Transform>();
     public void GenerateLevel()
     {
-        generatedPlatforms.Clear(); 
+        ClearLevel();
 
         // spawn the start platform
         GameObject start = Instantiate(startPlatformPrefab, levelStart.position, Quaternion.identity);
@@ -54,6 +54,17 @@ public class RandomGenerator : MonoBehaviour, ILevelGenerator
         // spawn the end platform
         GameObject end = Instantiate(endPlatformPrefab, levelEnd.position, Quaternion.identity);
         generatedPlatforms.Add(end.transform);
+    }
+    private void ClearLevel()
+    {
+        foreach (Transform platform in generatedPlatforms)
+        {
+            if (platform != null)
+            {
+                Destroy(platform.gameObject);
+            }
+        }
+        generatedPlatforms.Clear();
     }
     public List<Transform> GeneratedPlatforms
     {
