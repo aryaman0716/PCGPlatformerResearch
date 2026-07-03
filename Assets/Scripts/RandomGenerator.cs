@@ -55,7 +55,7 @@ public class RandomGenerator : MonoBehaviour, ILevelGenerator
         GameObject end = Instantiate(endPlatformPrefab, levelEnd.position, Quaternion.identity);
         generatedPlatforms.Add(end.transform);
     }
-    private void ClearLevel()
+    public void ClearLevel()
     {
         foreach (Transform platform in generatedPlatforms)
         {
