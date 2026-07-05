@@ -10,6 +10,8 @@ public class LevelEvaluator : MonoBehaviour
         int unreachableJumps = 0;
         float totalGap = 0f;
         float totalHeightDifference = 0f;
+        float maximumGap = 0f;
+        float maximumHeightDifference = 0f;
 
         for (int i = 0; i < platforms.Count - 1; i++)
         {
@@ -36,6 +38,8 @@ public class LevelEvaluator : MonoBehaviour
             float verticalDifference = targetBounds.max.y - startBounds.max.y;
             totalGap += horizontalGap;
             totalHeightDifference += Mathf.Abs(verticalDifference);
+            maximumGap = Mathf.Max(maximumGap, horizontalGap);
+            maximumHeightDifference = Mathf.Max(maximumHeightDifference, Mathf.Abs(verticalDifference));
 
             Debug.Log(
                $"Jump {i + 1} | " +
@@ -49,6 +53,8 @@ public class LevelEvaluator : MonoBehaviour
         currentMetrics.totalJumps = reachableJumps + unreachableJumps;
         currentMetrics.reachableJumps = reachableJumps;
         currentMetrics.unreachableJumps = unreachableJumps;
+        currentMetrics.maximumGap = maximumGap;
+        currentMetrics.maximumHeightDifference = maximumHeightDifference;
         currentMetrics.averageGap = currentMetrics.totalJumps > 0 ? totalGap / currentMetrics.totalJumps : 0f;
         currentMetrics.averageHeightDifference = currentMetrics.totalJumps > 0 ? totalHeightDifference / currentMetrics.totalJumps : 0f;
         currentMetrics.reachabilityPercentage = currentMetrics.totalJumps > 0 ? ((float)reachableJumps / currentMetrics.totalJumps) * 100f : 0f;

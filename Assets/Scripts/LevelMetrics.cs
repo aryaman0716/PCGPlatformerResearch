@@ -10,5 +10,7 @@ public class LevelMetrics
     public float reachabilityPercentage;
     public float averageGap;
     public float averageHeightDifference;
+    public float maximumGap;
+    public float maximumHeightDifference;
     public bool levelCompletable;
 }
