@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Text;
+using System.IO;
 public class ExperimentRunner : MonoBehaviour
 {
     public RandomGenerator randomGenerator;
@@ -11,6 +13,8 @@ public class ExperimentRunner : MonoBehaviour
     private ExperimentData randomExperiment = new ExperimentData();
     private ExperimentData constraintExperiment = new ExperimentData();
 
+    [Header("Export")]
+    public string csvFileName = "ExperimentResults.csv";
     private void Start()
     {
         StartCoroutine(RunExperiments());
@@ -85,5 +89,35 @@ public class ExperimentRunner : MonoBehaviour
         yield return StartCoroutine(RunConstraintExperiment());
         yield return new WaitForSeconds(1f);
         PrintSummary(constraintExperiment);
+        ExportResultsToCSV();
+        Debug.Log("All Experiments Completed and Results Exported");
+    }
+    private void ExportResultsToCSV()
+    {
+        StringBuilder csv = new StringBuilder();
+        csv.AppendLine("Generator," + "Level," + "TotalJumps," + "ReachableJumps," + "UnreachableJumps," + "ReachabilityPercentage," + "AverageGap," + "MaximumGap," + "AverageHeightDifference," + "MaximumHeightDifference," + "LevelCompletable");
+        WriteExperiment(csv, randomExperiment);
+        WriteExperiment(csv, constraintExperiment);
+        string filePath = Path.Combine(Application.dataPath, csvFileName);
+        File.WriteAllText(filePath, csv.ToString());
+        Debug.Log($"Results exported to:\n{filePath}");
+    }
+    private void WriteExperiment(StringBuilder csv, ExperimentData experiment)
+    {
+        foreach(LevelMetrics level in experiment.levels)
+        {
+            csv.AppendLine(
+            $"{level.generatorName}," +
+            $"{level.levelNumber}," +
+            $"{level.totalJumps}," +
+            $"{level.reachableJumps}," +
+            $"{level.unreachableJumps}," +
+            $"{level.reachabilityPercentage:F2}," +
+            $"{level.averageGap:F2}," +
+            $"{level.maximumGap:F2}," +
+            $"{level.averageHeightDifference:F2}," +
+            $"{level.maximumHeightDifference:F2}," +
+            $"{level.levelCompletable}");
+        }
     }
 }
