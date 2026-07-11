@@ -14,7 +14,7 @@ public class ExperimentRunner : MonoBehaviour
     private ExperimentData constraintExperiment = new ExperimentData();
 
     [Header("Export")]
-    public string csvFileName = "ExperimentResults.csv";
+    public string resultsFolder = "Results";
     private void Start()
     {
         StartCoroutine(RunExperiments());
@@ -98,9 +98,15 @@ public class ExperimentRunner : MonoBehaviour
         csv.AppendLine("Generator," + "Level," + "TotalJumps," + "ReachableJumps," + "UnreachableJumps," + "ReachabilityPercentage," + "AverageGap," + "MaximumGap," + "AverageHeightDifference," + "MaximumHeightDifference," + "LevelCompletable");
         WriteExperiment(csv, randomExperiment);
         WriteExperiment(csv, constraintExperiment);
-        string filePath = Path.Combine(Application.dataPath, csvFileName);
+        string folder = Path.Combine(Application.dataPath, resultsFolder);
+        if (!Directory.Exists(folder))
+        {
+            Directory.CreateDirectory(folder);
+        }
+        string timestamp = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+        string filePath = Path.Combine(folder, $"PCG_Comparison_{timestamp}.csv");
         File.WriteAllText(filePath, csv.ToString());
-        Debug.Log($"Results exported to:\n{filePath}");
+        Debug.Log($"Results exported to {filePath}");
     }
     private void WriteExperiment(StringBuilder csv, ExperimentData experiment)
     {
