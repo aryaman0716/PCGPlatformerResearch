@@ -1655,8 +1655,9 @@ MonoBehaviour:
   randomGenerator: {fileID: 1678801913}
   constraintGenerator: {fileID: 1382729049}
   evaluator: {fileID: 1097555536}
-  numberOfLevels: 5
+  numberOfLevels: 30
   delayBetweenLevels: 0.5
+  csvFileName: ExperimentResults.csv
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
