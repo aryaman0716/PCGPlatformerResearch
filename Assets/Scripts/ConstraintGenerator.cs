@@ -19,9 +19,19 @@ public class ConstraintGenerator : MonoBehaviour, ILevelGenerator
     public float maxJumpDistance = 6.4f;
     public float maxJumpHeight = 2f;
 
+    public int CurrentSeed { get; private set; }
     private List<Transform> generatedPlatforms = new List<Transform>();
-    public void GenerateLevel()
+    public void GenerateLevel(int? seed = null)
     {
+        if (seed.HasValue)
+        {
+            CurrentSeed = seed.Value;
+        }
+        else
+        {
+            CurrentSeed = Random.Range(int.MinValue, int.MaxValue);
+        }
+        Random.InitState(CurrentSeed);
         ClearLevel();
         GameObject start = Instantiate(startPlatformPrefab, levelStart.position, Quaternion.identity);
         generatedPlatforms.Add(start.transform);

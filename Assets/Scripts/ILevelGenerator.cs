@@ -2,6 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 public interface ILevelGenerator
 {
-    void GenerateLevel();
+    void GenerateLevel(int? seed = null);
     List<Transform> GeneratedPlatforms { get; }
 }

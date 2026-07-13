@@ -14,10 +14,19 @@ public class RandomGenerator : MonoBehaviour, ILevelGenerator
     public Transform levelStart;
     public Transform levelEnd;
     public Transform player;
-
+    public int CurrentSeed { get; private set; }
     private List<Transform> generatedPlatforms = new List<Transform>();
-    public void GenerateLevel()
+    public void GenerateLevel(int? seed = null)
     {
+        if (seed.HasValue)
+        {
+            CurrentSeed = seed.Value;
+        }
+        else
+        {
+            CurrentSeed = Random.Range(int.MinValue, int.MaxValue);
+        }
+        Random.InitState(CurrentSeed);
         ClearLevel();
 
         // spawn the start platform
@@ -49,6 +58,7 @@ public class RandomGenerator : MonoBehaviour, ILevelGenerator
             Vector3 platformPosition = new Vector3(randomX, randomY, randomZ);
             GameObject platform = Instantiate(platformPrefab, platformPosition, Quaternion.identity);
             generatedPlatforms.Add(platform.transform);
+            Debug.Log($"Platform {i} generated at position: {platform.transform.position}");
         }
 
         // spawn the end platform

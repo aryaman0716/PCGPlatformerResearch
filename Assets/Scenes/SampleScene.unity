@@ -575,6 +575,53 @@ MonoBehaviour:
   mouseSensitivity: 0.1
   minPitch: -80
   maxPitch: 80
+--- !u!1 &575773224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 575773226}
+  - component: {fileID: 575773225}
+  m_Layer: 0
+  m_Name: LevelReplayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &575773225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575773224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afe9169c9d7b71a4bafd9ac56efcd03f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelReplayer
+  randomGenerator: {fileID: 1678801913}
+  constraintGenerator: {fileID: 1382729049}
+  replaySeed: 0
+--- !u!4 &575773226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575773224}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.10713, y: 0, z: -1.74233}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &617611026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,6 +1186,7 @@ MonoBehaviour:
     reachableJumps: 0
     unreachableJumps: 0
     levelNumber: 0
+    randomSeed: 0
     generatorName: 
     reachabilityPercentage: 0
     averageGap: 0
@@ -1657,7 +1705,7 @@ MonoBehaviour:
   evaluator: {fileID: 1097555536}
   numberOfLevels: 30
   delayBetweenLevels: 0.5
-  csvFileName: ExperimentResults.csv
+  resultsFolder: Results
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1674,3 +1722,4 @@ SceneRoots:
   - {fileID: 1678801914}
   - {fileID: 1382729050}
   - {fileID: 1845058653}
+  - {fileID: 575773226}

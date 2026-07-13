@@ -30,6 +30,7 @@ public class ExperimentRunner : MonoBehaviour
             LevelMetrics metrics = evaluator.EvaluateLevel(randomGenerator.GeneratedPlatforms);
             metrics.generatorName = "Random Generator";
             metrics.levelNumber = i + 1;
+            metrics.randomSeed = randomGenerator.CurrentSeed; // storing the seed used for this level
             randomExperiment.levels.Add(metrics);
             yield return new WaitForSeconds(delayBetweenLevels);
             randomGenerator.ClearLevel();
@@ -48,6 +49,7 @@ public class ExperimentRunner : MonoBehaviour
             LevelMetrics metrics = evaluator.EvaluateLevel(constraintGenerator.GeneratedPlatforms);
             metrics.generatorName = "Constraint Generator";
             metrics.levelNumber = i + 1;
+            metrics.randomSeed = constraintGenerator.CurrentSeed; // storing the seed used for this level
             constraintExperiment.levels.Add(metrics);
             yield return new WaitForSeconds(delayBetweenLevels);
             constraintGenerator.ClearLevel();
@@ -95,7 +97,7 @@ public class ExperimentRunner : MonoBehaviour
     private void ExportResultsToCSV()
     {
         StringBuilder csv = new StringBuilder();
-        csv.AppendLine("Generator," + "Level," + "TotalJumps," + "ReachableJumps," + "UnreachableJumps," + "ReachabilityPercentage," + "AverageGap," + "MaximumGap," + "AverageHeightDifference," + "MaximumHeightDifference," + "LevelCompletable");
+        csv.AppendLine("Generator," + "Level," + "RandomSeed," + "TotalJumps," + "ReachableJumps," + "UnreachableJumps," + "ReachabilityPercentage," + "AverageGap," + "MaximumGap," + "AverageHeightDifference," + "MaximumHeightDifference," + "LevelCompletable");
         WriteExperiment(csv, randomExperiment);
         WriteExperiment(csv, constraintExperiment);
         string folder = Path.Combine(Application.dataPath, resultsFolder);
@@ -115,6 +117,7 @@ public class ExperimentRunner : MonoBehaviour
             csv.AppendLine(
             $"{level.generatorName}," +
             $"{level.levelNumber}," +
+            $"{level.randomSeed}," +
             $"{level.totalJumps}," +
             $"{level.reachableJumps}," +
             $"{level.unreachableJumps}," +

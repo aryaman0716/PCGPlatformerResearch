@@ -6,6 +6,7 @@ public class LevelMetrics
     public int reachableJumps;
     public int unreachableJumps;
     public int levelNumber;
+    public int randomSeed;
     public string generatorName;
     public float reachabilityPercentage;
     public float averageGap;
