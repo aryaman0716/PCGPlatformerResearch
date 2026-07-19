@@ -19,10 +19,7 @@ public class ReachabilityValidator : MonoBehaviour
         Vector3 startPoint = startBounds.ClosestPoint(targetBounds.center);
         Vector3 targetPoint = targetBounds.ClosestPoint(startBounds.center);
         float horizontalGap = Vector2.Distance(new Vector2(startPoint.x, startPoint.z), new Vector2(targetPoint.x, targetPoint.z));
-
-        float startTop = startBounds.max.y;
-        float targetTop = targetBounds.max.y;
-        float verticalDifference = targetTop - startTop;
+        float verticalDifference = Mathf.Abs(targetBounds.max.y - startBounds.max.y);
 
         bool reachable = horizontalGap <= maxJumpDistance && verticalDifference <= maxJumpHeight; 
         return reachable;

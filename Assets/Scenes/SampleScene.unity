@@ -1281,6 +1281,8 @@ MonoBehaviour:
   player: {fileID: 432271265}
   maxJumpDistance: 6.4
   maxJumpHeight: 2
+  validator: {fileID: 1424842968}
+  difficulty: 2
 --- !u!4 &1382729050
 Transform:
   m_ObjectHideFlags: 0
