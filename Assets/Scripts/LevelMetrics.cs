@@ -8,6 +8,7 @@ public class LevelMetrics
     public int levelNumber;
     public int randomSeed;
     public string generatorName;
+    public string difficulty;
     public float reachabilityPercentage;
     public float averageGap;
     public float averageHeightDifference;
